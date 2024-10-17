@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca1.model.LibroModel;
@@ -25,14 +26,19 @@ public class LibroController {
 	
 	//Ahora creamos el endpoint
 	
-	@PostMapping(value = "/save")
-	public LibroModel guardaLibro(@RequestBody LibroModel libro) {
-		LibroModel result = new LibroModel();
-		
-		result = libroService.guardaLibro(libro);
-		
-		return result;
-	}
+	 @PostMapping(value = "/save")
+	    public LibroModel guardaLibro(@RequestBody LibroModel libro) {
+	        System.out.println("Libro recibido: " + libro);
+	        LibroModel result = libroService.guardaLibro(libro);
+
+	        if (result == null) {
+	            System.out.println("No se pudo guardar el libro.");
+	            return null;
+	        } else {
+	            System.out.println("Libro guardado con éxito: " + result);
+	            return result; 
+	        }
+	    }
 	
 	
 	@GetMapping(value = "/getAll")

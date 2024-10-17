@@ -19,10 +19,10 @@ public class IdiomaServiceImpl implements IdiomaService {
 
     @Override
     public IdiomaModel guardaIdioma(IdiomaModel idioma) {
-        IdiomaModel result = new IdiomaModel();
+        IdiomaModel result = null; // Cambiamos la inicialización a null
         
         try {
-            result = idiomaRepo.save(idioma);
+            result = idiomaRepo.save(idioma); // Guardamos el idioma
         } catch (Exception e) {
             System.out.println("[guardaIdioma] exception:" + e.getMessage());
         }

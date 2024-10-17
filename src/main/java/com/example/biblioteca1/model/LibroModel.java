@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Libro")
@@ -14,22 +16,25 @@ public class LibroModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Codigo_libro;
+	private Integer codigo_libro;
 	
 	private String titulo;
 	
 	private Integer año;
 	
-	private Integer codigo_idioma;
-
+	//Se establece relación @ManyToOne con Idioma
+	@ManyToOne
+	@JoinColumn(name = "Codigo_idioma", nullable = false)
+	private IdiomaModel idioma;
 	
 	
-	public Integer getIdLibro() {
-		return Codigo_libro;
+	
+	public Integer getCodigoLibro() {
+		return codigo_libro;
 	}
 
-	public void setIdLibro(Integer codigo_libro) {
-		this.Codigo_libro = codigo_libro;
+	public void setCodigoLibro(Integer codigo_libro) {
+		this.codigo_libro = codigo_libro;
 	}
 	
 
@@ -49,13 +54,23 @@ public class LibroModel {
 		this.año = año;
 	}
 
-
-	public Integer getCodigo_idioma() {
-		return codigo_idioma;
+	// Getters y Setters para codigoIdioma
+	public IdiomaModel getIdioma() {
+		return idioma;
 	}
 
-	public void setCodigo_idioma(Integer codigo_idioma) {
-		this.codigo_idioma = codigo_idioma;
+	public void setIdioma(IdiomaModel idioma) {
+		this.idioma = idioma;
+	}
+	
+	@Override
+	public String toString() {
+	    return "LibroModel{" +
+	            "codigo_libro=" + codigo_libro +
+	            ", titulo='" + titulo + '\'' +
+	            ", año=" + año +
+	            ", idioma=" + idioma +
+	            '}';
 	}
 	
 	
